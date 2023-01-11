@@ -31,6 +31,41 @@ AVD: Wear OS 3 - Preview ARM 64 v8a System Image API 30, Rev 11
 Hardware: Pixel Watch
 
 ## How to recreate the issue
+In `GraphsScreen.kt` file, two composables contains `AndroidView` is either applied with `unswipeable` or `edgeSwipeToDismiss(swipeToDismissBoxState, 0.dp)`
+```kotlin
+        item {
+            Text("Unswipeable")
+        }
+        item {
+            HorizontalDraggableLineChart(
+                androidViewModifier = Modifier.unswipeable(),
+                chartColorInt = whiteColorInt,
+                dataMap = dataMap,
+                fillGradientDrawable = fillGradientDrawable!!
+            )
+        }
+        item {
+            Text("EdgeSwipeToDismiss")
+        }
+        item {
+            HorizontalDraggableLineChart(
+                androidViewModifier = Modifier.edgeSwipeToDismiss(swipeToDismissBoxState, 0.dp),
+                chartColorInt = whiteColorInt,
+                dataMap = dataMap,
+                fillGradientDrawable = fillGradientDrawable!!
+            )
+        }
+```
+The following video shows, while the `unswipeable` hack can disable `swipe` gesture, 
+but the most drag event on `AndroidMPChart` LineChart are difficult to detect, the drag feels laggy.
+While the `edgeSwipeToDismiss(swipeToDismissBoxState, 0.dp)` modifier applied on `AndroidView` composable 
+wraps `AndroidMPChart` LineChart, doesn't work. Drag event will be consumed by `SwipeDismissableNavHost`,
+The LineChart in case `edgeSwipeToDismiss` can not be drag horizontally.
+
+<video autoplay loop muted playsinline>
+  <source src="video/dragEventConflictAndroidView.webm" type="video/webm">
+</video>
+
 
 
 
