@@ -26,9 +26,9 @@ Non-Bundled Plugins:
     idea.plugin.protoeditor (213.6461.28)
 ```
 
-Emulator Version: 31.3.14
-AVD: Wear OS 3 - Preview ARM 64 v8a System Image API 30, Rev 11
-Hardware: Pixel Watch
+* Emulator Version: 31.3.14
+* AVD: Wear OS 3 - Preview ARM 64 v8a System Image API 30, Rev 11
+* Hardware: Pixel Watch
 
 ## How to recreate the issue
 In `GraphsScreen.kt` file, two composables contains `AndroidView` is either applied with `unswipeable` or `edgeSwipeToDismiss(swipeToDismissBoxState, 0.dp)`
@@ -62,9 +62,13 @@ While the `edgeSwipeToDismiss(swipeToDismissBoxState, 0.dp)` modifier applied on
 wraps `AndroidMPChart` LineChart, doesn't work. Drag event will be consumed by `SwipeDismissableNavHost`,
 The LineChart in case `edgeSwipeToDismiss` can not be drag horizontally.
 
+[Demo Video of Drag Event Conflict](video/dragEventConflictAndroidView.webm)
+
+<!--
 <video autoplay loop muted playsinline>
   <source src="video/dragEventConflictAndroidView.webm" type="video/webm">
 </video>
+-->
 
 
 
