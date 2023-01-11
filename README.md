@@ -31,6 +31,12 @@ Non-Bundled Plugins:
 * Hardware: Pixel Watch
 
 ## How to recreate the issue
+1. Run the `app` on wear OS 3 Emulator, or Pixel Watch
+2. Navigate from `Graphs` to see the two different `AndroidView` wraps `MPAndroidChart` LineChart
+3. Scroll Horizontally on the both LineChart graphs.
+
+Note:\
+
 In `GraphsScreen.kt` file, two composables contains `AndroidView` is either applied with `unswipeable` or `edgeSwipeToDismiss(swipeToDismissBoxState, 0.dp)`
 ```kotlin
         item {
